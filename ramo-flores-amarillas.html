@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para vos</title>
+<style>
+  :root {
+    --sky-top: #fff6e5;
+    --sky-bottom: #ffe9d6;
+    --text-color: #5a3d2b;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: radial-gradient(ellipse at top, var(--sky-top), var(--sky-bottom));
+    font-family: Georgia, 'Times New Roman', serif;
+    overflow-x: hidden;
+  }
+  .stage {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: env(safe-area-inset-top, 24px) 16px env(safe-area-inset-bottom, 24px);
+    position: relative;
+  }
+  .bouquet-wrap {
+    width: min(88vw, 420px);
+  }
+  .bouquet-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 18px 24px rgba(90, 61, 43, 0.18));
+    animation: sway 5s ease-in-out infinite;
+    transform-origin: 50% 95%;
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-1.2deg); }
+    50%      { transform: rotate(1.2deg); }
+  }
+
+  .bloom-group {
+    opacity: 0;
+    transform: scale(0.2);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bloom 0.9s cubic-bezier(.2,1.4,.4,1) forwards;
+  }
+
+  @keyframes bloom {
+    0%   { opacity: 0; transform: scale(0.15) rotate(-8deg); }
+    70%  { opacity: 1; transform: scale(1.08) rotate(2deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .message {
+    margin-top: 24px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 1.4s ease forwards;
+    animation-delay: 2.8s;
+    max-width: 380px;
+  }
+  @keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .message h1 {
+    font-size: clamp(20px, 5.5vw, 30px);
+    color: var(--text-color);
+    margin: 0 0 6px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+  .message p {
+    font-size: clamp(13px, 3.6vw, 15px);
+    color: #8a6a52;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .petal-fall {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50% 0 50% 0;
+    pointer-events: none;
+    opacity: 0.85;
+    z-index: 5;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(400deg); opacity: 0; }
+  }
+
+  @media (max-width: 360px) {
+    .stage { padding-left: 10px; padding-right: 10px; }
+    .bouquet-wrap { width: 94vw; }
+    .message { margin-top: 16px; }
+  }
+
+  @media (max-height: 620px) {
+    .stage { justify-content: flex-start; padding-top: 20px; }
+    .bouquet-wrap { width: min(80vw, 340px); }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="bouquet-wrap">
+    <svg viewBox="0 0 480 660" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="petalGrad1" cx="50%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#fff3b0"/>
+          <stop offset="55%" stop-color="#ffd93d"/>
+          <stop offset="100%" stop-color="#f5b301"/>
+        </radialGradient>
+        <radialGradient id="petalGrad2" cx="50%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#ffedb0"/>
+          <stop offset="55%" stop-color="#ffcf3f"/>
+          <stop offset="100%" stop-color="#eaa500"/>
+        </radialGradient>
+        <radialGradient id="petalGrad3" cx="50%" cy="25%" r="80%">
+          <stop offset="0%" stop-color="#fffbe0"/>
+          <stop offset="60%" stop-color="#ffe45c"/>
+          <stop offset="100%" stop-color="#ffc521"/>
+        </radialGradient>
+        <radialGradient id="centerGrad" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#c98a3e"/>
+          <stop offset="100%" stop-color="#7a4a1e"/>
+        </radialGradient>
+        <radialGradient id="centerGrad2" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#e0902f"/>
+          <stop offset="100%" stop-color="#a15c12"/>
+        </radialGradient>
+        <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f1e0c2"/>
+          <stop offset="50%" stop-color="#e6cd9f"/>
+          <stop offset="100%" stop-color="#d9b981"/>
+        </linearGradient>
+        <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#f2a6bb"/>
+          <stop offset="100%" stop-color="#e07d9a"/>
+        </linearGradient>
+      </defs>
+
+      <path d="M165 445 L315 445 L285 620 L195 620 Z" fill="url(#paperGrad)" stroke="#c9a76f" stroke-width="1"/>
+      <path d="M188 445 L207 620" stroke="#c9a76f" stroke-width="0.6" opacity="0.5"/>
+      <path d="M240 445 L240 620" stroke="#c9a76f" stroke-width="0.6" opacity="0.5"/>
+      <path d="M292 445 L273 620" stroke="#c9a76f" stroke-width="0.6" opacity="0.5"/>
+
+      <g stroke="#5a8a3c" stroke-width="4" fill="none" stroke-linecap="round">
+        <path d="M215 470 C 200 410, 175 360, 140 290"/>
+        <path d="M228 465 C 218 400, 205 350, 180 270"/>
+        <path d="M240 462 C 238 390, 238 330, 240 240"/>
+        <path d="M252 465 C 262 400, 275 350, 300 270"/>
+        <path d="M265 470 C 280 410, 305 360, 340 290"/>
+        <path d="M232 465 C 220 420, 200 390, 175 340"/>
+        <path d="M248 465 C 260 420, 280 390, 305 340"/>
+      </g>
+
+      <g fill="#5a8a3c">
+        <path d="M205 400 Q180 393 170 412 Q196 418 205 400 Z"/>
+        <path d="M278 392 Q305 383 316 402 Q288 411 278 392 Z"/>
+        <path d="M222 330 Q202 318 187 330 Q205 342 222 330 Z"/>
+        <path d="M262 335 Q282 322 298 333 Q280 346 262 335 Z"/>
+        <path d="M195 380 Q178 388 182 405 Q200 398 195 380 Z"/>
+      </g>
+
+      <g fill="#fff" opacity="0.9">
+        <circle cx="140" cy="300" r="4"/>
+        <circle cx="128" cy="320" r="3"/>
+        <circle cx="345" cy="300" r="4"/>
+        <circle cx="358" cy="320" r="3"/>
+        <circle cx="178" cy="270" r="3.5"/>
+        <circle cx="305" cy="265" r="3.5"/>
+        <circle cx="195" cy="355" r="3"/>
+        <circle cx="285" cy="360" r="3"/>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:0.1s">
+        <g transform="translate(240,195)">
+          <g>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(40)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(80)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(120)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(160)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(200)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(240)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(280)"/>
+            <ellipse cx="0" cy="-48" rx="18" ry="32" fill="url(#petalGrad1)" transform="rotate(320)"/>
+          </g>
+          <g>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(20)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(60)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(100)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(140)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(220)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(260)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(300)"/>
+            <ellipse cx="0" cy="-31" rx="13" ry="21" fill="url(#petalGrad2)" transform="rotate(340)"/>
+          </g>
+          <circle cx="0" cy="0" r="21" fill="url(#centerGrad)"/>
+          <g fill="#5c3a16" opacity="0.5">
+            <circle cx="-6" cy="-4" r="1.4"/><circle cx="4" cy="-6" r="1.4"/><circle cx="8" cy="2" r="1.4"/>
+            <circle cx="-3" cy="6" r="1.4"/><circle cx="6" cy="8" r="1.4"/><circle cx="-8" cy="4" r="1.4"/>
+          </g>
+        </g>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:0.3s">
+        <g transform="translate(178,235) scale(0.9)">
+          <g>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(10)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(50)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(130)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(170)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(210)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(250)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(290)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad2)" transform="rotate(330)"/>
+          </g>
+          <g>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(30)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(70)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(110)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(150)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(190)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(230)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(310)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad1)" transform="rotate(350)"/>
+          </g>
+          <circle cx="0" cy="0" r="20" fill="url(#centerGrad)"/>
+          <g fill="#5c3a16" opacity="0.5">
+            <circle cx="-6" cy="-4" r="1.4"/><circle cx="4" cy="-6" r="1.4"/><circle cx="8" cy="2" r="1.4"/>
+            <circle cx="-3" cy="6" r="1.4"/><circle cx="6" cy="8" r="1.4"/><circle cx="-8" cy="4" r="1.4"/>
+          </g>
+        </g>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:0.5s">
+        <g transform="translate(302,235) scale(0.9)">
+          <g>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(5)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(85)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(125)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(165)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(205)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(245)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(285)"/>
+            <ellipse cx="0" cy="-46" rx="17" ry="30" fill="url(#petalGrad1)" transform="rotate(325)"/>
+          </g>
+          <g>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(25)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(65)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(105)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(145)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(185)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(265)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(305)"/>
+            <ellipse cx="0" cy="-30" rx="12" ry="20" fill="url(#petalGrad2)" transform="rotate(345)"/>
+          </g>
+          <circle cx="0" cy="0" r="20" fill="url(#centerGrad)"/>
+          <g fill="#5c3a16" opacity="0.5">
+            <circle cx="-6" cy="-4" r="1.4"/><circle cx="4" cy="-6" r="1.4"/><circle cx="8" cy="2" r="1.4"/>
+            <circle cx="-3" cy="6" r="1.4"/><circle cx="6" cy="8" r="1.4"/><circle cx="-8" cy="4" r="1.4"/>
+          </g>
+        </g>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:0.7s">
+        <g transform="translate(138,300)">
+          <g>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(30)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(60)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(120)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(150)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(210)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(240)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(300)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(330)"/>
+          </g>
+          <circle cx="0" cy="0" r="15" fill="url(#centerGrad2)"/>
+        </g>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:0.9s">
+        <g transform="translate(342,300)">
+          <g>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(15)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(75)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(105)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(165)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(195)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(255)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(285)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(315)"/>
+            <ellipse cx="0" cy="-38" rx="7" ry="34" fill="url(#petalGrad3)" transform="rotate(345)"/>
+          </g>
+          <circle cx="0" cy="0" r="15" fill="url(#centerGrad2)"/>
+        </g>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:1.05s">
+        <g transform="translate(192,365) scale(0.55)">
+          <g>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(51)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(102)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(153)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(204)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(255)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad2)" transform="rotate(306)"/>
+          </g>
+          <circle cx="0" cy="0" r="18" fill="url(#centerGrad)"/>
+        </g>
+      </g>
+
+      <g class="bloom-group" style="animation-delay:1.2s">
+        <g transform="translate(288,368) scale(0.55)">
+          <g>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(15)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(66)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(117)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(168)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(219)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-38" rx="15" ry="26" fill="url(#petalGrad1)" transform="rotate(321)"/>
+          </g>
+          <circle cx="0" cy="0" r="18" fill="url(#centerGrad)"/>
+        </g>
+      </g>
+
+      <path d="M212 440 Q240 460 268 440 L268 470 Q240 485 212 470 Z" fill="url(#ribbonGrad)" stroke="#c9718c" stroke-width="1"/>
+      <path d="M212 445 L182 420 L197 475 Z" fill="url(#ribbonGrad)" stroke="#c9718c" stroke-width="1"/>
+      <path d="M268 445 L298 420 L283 475 Z" fill="url(#ribbonGrad)" stroke="#c9718c" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="message" id="msg">
+    <h1 id="msgTitle">Para vos</h1>
+    <p>Un ramo que no se marchita, hecho con cariño.</p>
+  </div>
+</div>
+
+<script>
+  const colors = ['#ffd93d', '#ffcf3f', '#f5b301', '#ffe45c'];
+  function fallingPetal() {
+    const p = document.createElement('div');
+    p.className = 'petal-fall';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    const duration = 4 + Math.random() * 3;
+    p.style.animation = `fall ${duration}s linear forwards`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), duration * 1000 + 200);
+  }
+  setInterval(fallingPetal, 700);
+</script>
+</body>
+</html>
